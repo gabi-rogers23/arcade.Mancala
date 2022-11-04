@@ -1,15 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+h1 {
+    height: 50px;
+    width: 150px;
+    text-align: center;
+    padding: 5px;
+    margin: 15px auto;
+}
+
+#startingButtons {
+    width: 50px;
+    height: 25px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 25px auto;
+}
+
 div {
-    border: 1px solid black;
     height: 50px;
     width: 50px;
 }
 
 #gameboard {
+    width: 600px;
     height: 100px;
-    width: auto;
+    margin: 25px auto auto auto;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+}
+
+#playerPits {
+    height: 100px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+#playerOne div, #playerTwo div{
+    border: 1px solid black;
+}
+
+#playerOne{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 300px;
+    height: 50px;
+    border: 1px solid orange;
+}
+
+
+#sixEnd {
+    height: 100px;
+    width: 50px;
+    border: 1px solid blue;
+    align-self: flex-start;
+}
+
+
+#playerTwo {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 300px;
+    height: 50px;
+    border: 1px solid blue;
+}
+
+#thirteenEnd {
+    height: 100px;
+    border: 1px solid orange;
+    align-self: flex-end;
 }
