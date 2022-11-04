@@ -1,0 +1,15 @@
+div {
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+}
+
+#gameboard {
+    height: 100px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
