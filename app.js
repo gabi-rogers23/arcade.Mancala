@@ -13,22 +13,63 @@ const newBoard = [
 
   const gameState = {
     board: newBoard, // from above
-    currentPlayer: 0, // switch to 1 when the player swaps
+    currentPlayer: 1, // switch to 2 when the player swaps
 
 //connect board to indexes
-   zero: function () {
-    return this.board[0]},
+    playerOneIndexes: {    
+        zero: 0,
+        one: 1,
+        two: 2,
+        three: 3,
+        four: 4,
+        five: 5,
+    },
 
+    six: 6, //player 1 bucket
+
+    playerTwoIndexes: {
+        seven: 7,
+        eight: 8,
+        nine: 9,
+        ten: 10,
+        eleven: 11,
+        tweleve: 12,
+    },
+
+    thirteen: 13, //player 2 bucket 
+
+
+// event.target.innerText = pipAmount;
 
 
 // Pick a space and empty one pip per space until you run out
+//select the id to match the keys in the playerIndexes Objects
+  move: function(playerClickKey) {
+    let pitIndex;
 
-  move: function(event) {
-    let divClicked = event.target.id;
-    console.log(gameState[divClicked]())
+//checking that a player can only access their side
+    if (gameState.currentPlayer = 1) {
+        pitIndex = gameState.playerOneIndexes[playerClickKey];
+    } else {
+        pitIndex = gameState.playerTwoIndexes[playerClickKey];
+    }
 
-    //A player must select a div from their side and not the bucket
+    if (pitIndex === null || pitIndex === undefined) {
+        return; //the player selected an invalid index
+    }
     // The div must have pips
+    let pipAmount = gameState.board[pitIndex];
+    if (pipAmount === 0) {
+        return;
+    }
+
+    gameState.board[pitIndex] = 0;
+    
+    for (let i = pitIndex + 1; i <= pipAmount; i++) {
+        gameState.board[i] += 1;
+    }
+
+    
     // If a pip goes into the bucket/score keeper it does not come back out
     // If a player goes around, they cannot put any pips in the opposite players bucket/scoreKeeper
     // If the last pip lands in the bucket/score keeper then they get to go again 
@@ -37,6 +78,8 @@ const newBoard = [
   }
 
 }
+
+
 
 // function computerPlayer
     //enter Computer under player 2
@@ -60,4 +103,13 @@ const newBoard = [
     // reset's the board
     // reset's the players names?
 
-document.getElementById('playerPits').addEventListener('click', gameState.move)
+document.getElementById('playerPits').addEventListener('click', (event)=> {
+    //purposely named the HTML ids to be the same as the keys to pass them through to the indexed objects
+gameState.move(event.target.id);
+updateBoard();
+
+}) 
+
+function updateBoard() {
+    
+}
