@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -54,13 +54,14 @@ div {
     border: 1px solid black;
 }
 
-#playerOne div, #playerTwo div{
+#playerOne div,
+#playerTwo div {
     border: 1px solid black;
     text-align: center;
     padding-top: 15px;
 }
 
-#playerOne{
+#playerOne {
     display: flex;
     flex-flow: row nowrap;
     width: 300px;

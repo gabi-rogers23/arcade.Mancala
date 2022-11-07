@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mancala</title>
 
-<!-- //Loads CSS file/// -->
-<link rel="stylesheet" href="/style.css" />
+    <!-- //Loads CSS file/// -->
+    <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
-<h1>Mancala!</h1>
-<div id = 'startingButtons'>
-    <button id = 'start'>Start</button>
-    <!-- player number? 1 or 2 -->
-    <!-- add palyer input for names -->
-</div>
+    <h1>Mancala!</h1>
+    <div id='startingButtons'>
+        <button id='start'>Start</button>
+        <!-- player number? 1 or 2 -->
+        <!-- add palyer input for names -->
+    </div>
 
-<section id = 'gameboard'>
-     <!-- Player two bucket/score keeper -->
-    <div id = 'thirteenEnd'></div>
+    <section id='gameboard'>
+        <!-- Player two bucket/score keeper -->
+        <div id='thirteenEnd'></div>
 
-     <div id = 'playerPits'>
-        <!-- Player two Side (top) -->
-        <div id='playerTwo'>
-            <div id = 'twelve'>4</div>
-            <div id = 'eleven'>4</div>
-            <div id = 'ten'>4</div>
-            <div id = 'nine'>4</div>
-            <div id = 'eight'>4</div>
-            <div id = 'seven'>4</div>
+        <div id='playerPits'>
+            <!-- Player two Side (top) -->
+            <div id='playerTwo'>
+                <div id='twelve'></div>
+                <div id='eleven'></div>
+                <div id='ten'></div>
+                <div id='nine'></div>
+                <div id='eight'></div>
+                <div id='seven'></div>
+            </div>
+            <!-- player one side(bottom) -->
+            <div id='playerOne'>
+                <div id='zero'></div>
+                <div id='one'></div>
+                <div id='two'></div>
+                <div id='three'></div>
+                <div id='four'></div>
+                <div id='five'></div>
+            </div>
         </div>
-        <!-- player one side(bottom) -->
-        <div id ='playerOne'>
-            <div id = 'zero'></div>
-            <div id = 'one'>4</div>
-            <div id = 'two'>4</div>
-            <div id = 'three'>4</div>
-            <div id = 'four'>4</div>
-            <div id = 'five'>4</div>
-        </div>
-     </div>
-     <!-- Player one bucket/score keeper -->
-    <div id = 'sixEnd'></div> 
+        <!-- Player one bucket/score keeper -->
+        <div id='sixEnd'></div>
 
-</section>
+    </section>
 
-<!-- <button id = 'reset'>Reset</button> -->
+    <!-- <button id = 'reset'>Reset</button> -->
     <!-- //Adding javascript// -->
     <script type="text/javascript" src="/app.js"></script>
 </body>
+
 </html>
