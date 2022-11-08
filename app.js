@@ -41,18 +41,40 @@ const gameState = {
 //needs ending index for the following rules:
 // If the last pip lands in the bucket/score keeper then they get to go again 
     switchPlayer: function(endIndex) {
+
         if (gameState.currentPlayer === 1) {
-            if (endIndex === 6){
+            if (endIndex === 7){ /* off by one because the for loop stops at less than 7 */
                 return;
             }       
             gameState.currentPlayer = 2;
         } else {
-            if (endIndex === 12){
+            if (endIndex === 13){
                 return;
             }
             gameState.currentPlayer = 1;
         }
     },
+
+    stealPips: function(endIndex) {
+        let adjustedIndex = endIndex - 1; // The end index from the loop is 1 more than the actual stopping point
+        if (gameState.currentPlayer === 1 && gameState.board[adjustedIndex] === 1) {
+            // Steal pips from Player 2 in 0 pit
+            if (adjustedIndex === 0) {
+                let addedPips = gameState.board[0] + gameState.board[12]
+                gameState.board[6] += addedPips//take index 0 value + index 12 value += index 6 value
+                gameState.board[0] = 0;
+                gameState.board[12] = 0;
+            }
+        }
+        // let arrayPairOne = //index 0, 12
+        // let arrayPairTwo = //index 1, 11
+        // let arrayPairThree = //index 2, 10
+        // let arrayPairThree = //index 3, 9
+        // let arrayPairFour = //index 4, 8
+        // let arrayPairFive = //index 5, 7
+    },
+    // If the last pip lands on the players side of the board in an empty space they get that pip and the pips across from it 
+        // Make Array Pairs i.e. (index 0 and index 12) are a pair
 
     //select the id to match the keys in the playerIndexes Objects
     move: function (playerClickKey) {
@@ -104,17 +126,12 @@ const gameState = {
         if (gameState.currentPlayer === 1) {
             copyBoard.push(gameState.board[13]);
         } else {
-            copyBoard.splice(5, 0, gameState.board[6]);
+            copyBoard.splice(6, 0, gameState.board[6]);
         }
         gameState.board = copyBoard;
         console.log(copyBoard);
-
+        gameState.stealPips(endIndex);
         gameState.switchPlayer(endIndex);
-       
-      
-      
-        // If the last pip lands on the players side of the board in an empty space they get that pip and the pips across from it 
-        // Make Array Pairs i.e. (index 0 and index 12) are a pair
     }
 
 }
