@@ -7,6 +7,39 @@
 //Have the game choose player 1 or player 2 to start
 //display who's turn it is alternating according to the rules
 
+
+
+const playerState = {
+
+ startGame: function(event) {
+    let clicked = event.target
+    let startButton = document.getElementById('start');
+    let onePlayer = document.getElementsByClassName('numOfPlayers')[0];
+    console.log(onePlayer)
+    let twoPlayers = document.getElementsByClassName('numOfPlayers')[1];
+   
+    if (clicked === startButton) {
+        startButton.style.visibility = 'hidden';
+        onePlayer.style.visibility = 'visible';
+        twoPlayers.style.visibility = 'visible';
+        onePlayer.onclick() = playerState.onePlayer(event) //this is skipping selecting 1 player or 2 players and getting into the next step
+    }
+ },
+
+ onePlayer: function(event) {
+    let clicked = event.target
+    console.log(clicked)
+    let onePlayer = document.getElementsByClassName('numOfPlayers')[0];
+            onePlayer.style.visibility = 'hidden'
+            twoPlayers.style.visibility = 'hidden'
+            document.getElementById('player1Name').style.visibility = 'visible'
+            // computerize = true;
+        },
+}
+
+document.getElementById('startingButtons').addEventListener('click',playerState.startGame);
+
+/////////
 const newBoard = [
     4, 4, 4, 4, 4, 4, 0, /* player 1 */ 4, 4, 4, 4, 4, 4, 0 /* player 2 */
 ];
@@ -57,6 +90,7 @@ const gameState = {
 
     },
 
+     // If the last pip lands on the players side of the board in an empty space they get that pip and the pips across from it 
     stealPips: function(endIndex) {
         let adjustedIndex = (endIndex - 1) % 13; // The end index from the loop is 1 more than the actual stopping point
         // console.log(adjustedIndex);
@@ -131,8 +165,7 @@ const gameState = {
             gameState.board[13] += addedPips
         }
     },
-    // If the last pip lands on the players side of the board in an empty space they get that pip and the pips across from it 
-        // Make Array Pairs i.e. (index 0 and index 12) are a pair
+   
 
     //select the id to match the keys in the playerIndexes Objects
     move: function (playerClickKey) {
@@ -219,6 +252,7 @@ document.getElementById('playerPits').addEventListener('click', (event) => {
 
 })
 
+//render board values to HTML
 function updateBoard() {
 
     document.getElementById('zero').innerText = gameState.board[0];

@@ -27,6 +27,27 @@ h1 {
     margin: 25px auto;
 }
 
+#start {
+    padding: 5px;
+    visibility: visible;
+}
+
+.numOfPlayers { 
+    visibility: hidden;
+}
+
+#player1Name {
+    visibility: hidden;
+}
+
+#ok {
+    visibility: hidden;
+}
+
+#player2Name {
+    visibility: hidden;
+}
+
 div {
     height: 50px;
     width: 50px;
