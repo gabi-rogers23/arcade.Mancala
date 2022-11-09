@@ -38,7 +38,8 @@ const gameState = {
 
     thirteenEnd: 13, //player 2 bucket 
 
-//needs ending index for the following rules:
+//needs endingIndex passed in for the following rules:
+
 // If the last pip lands in the bucket/score keeper then they get to go again 
     switchPlayer: function(endIndex) {
 
@@ -53,25 +54,82 @@ const gameState = {
             }
             gameState.currentPlayer = 1;
         }
+
     },
 
     stealPips: function(endIndex) {
-        let adjustedIndex = endIndex - 1; // The end index from the loop is 1 more than the actual stopping point
+        let adjustedIndex = (endIndex - 1) % 13; // The end index from the loop is 1 more than the actual stopping point
+        // console.log(adjustedIndex);
+
+        //Player 1// 
         if (gameState.currentPlayer === 1 && gameState.board[adjustedIndex] === 1) {
+            let addedPips = 0;
             // Steal pips from Player 2 in 0 pit
-            if (adjustedIndex === 0) {
-                let addedPips = gameState.board[0] + gameState.board[12]
-                gameState.board[6] += addedPips//take index 0 value + index 12 value += index 6 value
+            if (adjustedIndex === 0 && gameState.board[12] !== 0) {
+                addedPips = gameState.board[0] + gameState.board[12]
+                 //take index 0 value + index 12 value += index 6 value
                 gameState.board[0] = 0;
                 gameState.board[12] = 0;
+            } else if (adjustedIndex === 1 && gameState.board[11] !== 0) { //Steal from player 2 in 1 pit
+                addedPips = gameState.board[1] + gameState.board[11];
+                gameState.board[1] = 0;
+                gameState.board[11] = 0;
+            } else if (adjustedIndex === 2 && gameState.board[10] !== 0) {
+                addedPips = gameState.board[2] + gameState.board[10];
+                gameState.board[2] = 0;
+                gameState.board[10] = 0;
+            } else if (adjustedIndex === 3 && gameState.board[9] !== 0) {
+                addedPips = gameState.board[3] + gameState.board[9];
+                gameState.board[3] = 0;
+                gameState.board[9] = 0;
+            } else if (adjustedIndex === 4 && gameState.board[8] !== 0) {
+                addedPips = gameState.board[4] + gameState.board[8];
+                gameState.board[4] = 0;
+                gameState.board[8] = 0;
+            } else if (adjustedIndex === 5 && gameState.board[7] !== 0) {
+                addedPips = gameState.board[5] + gameState.board[7];
+                gameState.board[5] = 0;
+                gameState.board[7] = 0;
             }
+            console.log('added Pips =' + addedPips + ' current goal ' + gameState.board[6]);
+            gameState.board[6] += addedPips
         }
-        // let arrayPairOne = //index 0, 12
-        // let arrayPairTwo = //index 1, 11
-        // let arrayPairThree = //index 2, 10
-        // let arrayPairThree = //index 3, 9
-        // let arrayPairFour = //index 4, 8
-        // let arrayPairFive = //index 5, 7
+
+        //Player 2//
+        adjustedIndex = endIndex % 13;
+        console.log(adjustedIndex)
+        if (gameState.currentPlayer === 2 && gameState.board[adjustedIndex] === 1) {
+         addedPips = 0;
+
+            if (adjustedIndex === 12 && gameState.board[0] !== 0) {
+                addedPips = gameState.board[12] + gameState.board[0]
+                 //take index 0 value + index 12 value += index 6 value
+                gameState.board[0] = 0;
+                gameState.board[12] = 0;
+            } else if (adjustedIndex === 11 && gameState.board[1] !== 0) { 
+                addedPips = gameState.board[11] + gameState.board[1];
+                gameState.board[1] = 0;
+                gameState.board[11] = 0;
+            } else if (adjustedIndex === 10 && gameState.board[2] !== 0) {
+                addedPips = gameState.board[10] + gameState.board[2];
+                gameState.board[2] = 0;
+                gameState.board[10] = 0;
+            } else if (adjustedIndex === 9 && gameState.board[3] !== 0) {
+                addedPips = gameState.board[9] + gameState.board[3];
+                gameState.board[3] = 0;
+                gameState.board[9] = 0;
+            } else if (adjustedIndex === 8 && gameState.board[4] !== 0) {
+                addedPips = gameState.board[8] + gameState.board[4];
+                gameState.board[4] = 0;
+                gameState.board[8] = 0;
+            } else if (adjustedIndex === 7 && gameState.board[5] !== 0) {
+                addedPips = gameState.board[7] + gameState.board[5];
+                gameState.board[5] = 0;
+                gameState.board[7] = 0;
+            }
+            console.log('added Pips =' + addedPips + ' current goal ' + gameState.board[13]);
+            gameState.board[13] += addedPips
+        }
     },
     // If the last pip lands on the players side of the board in an empty space they get that pip and the pips across from it 
         // Make Array Pairs i.e. (index 0 and index 12) are a pair
