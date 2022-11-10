@@ -24,11 +24,28 @@ h1 {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+    justify-content: center;
     margin: 25px auto;
 }
 
+#player1 {
+    visibility: hidden;
+    background: blue;
+    color: white;
+    width: 200px;
+    text-align: center;
+}
+
+#player2 {
+    visibility: hidden;
+    background: blue;
+    color: white;
+    width: 200px;
+    text-align: center;
+}
+
 #start {
-    padding: 5px;
+    margin-top: 100px;
     visibility: visible;
 }
 
@@ -36,15 +53,15 @@ h1 {
     visibility: hidden;
 }
 
-#player1Name {
+#player1Input {
     visibility: hidden;
 }
 
-#ok {
+#enter {
     visibility: hidden;
 }
 
-#player2Name {
+#player2Input {
     visibility: hidden;
 }
 

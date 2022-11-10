@@ -6,47 +6,65 @@
 
 //Have the game choose player 1 or player 2 to start
 //display who's turn it is alternating according to the rules
-
-
+let startButton = document.getElementById('start');
+let onePlayer = document.getElementsByClassName('numOfPlayers')[0];
+let twoPlayers = document.getElementsByClassName('numOfPlayers')[1];
+let player1 = document.getElementById('player1');
+let player2 = document.getElementById('player2');
 
 const playerState = {
 
- startGame: function(event) {
-    let clicked = event.target
-    let startButton = document.getElementById('start');
-    let onePlayer = document.getElementsByClassName('numOfPlayers')[0];
-    console.log(onePlayer)
-    let twoPlayers = document.getElementsByClassName('numOfPlayers')[1];
-   
-    if (clicked === startButton) {
+computerize: false,
+
+ startGame: function() {
         startButton.style.visibility = 'hidden';
         onePlayer.style.visibility = 'visible';
         twoPlayers.style.visibility = 'visible';
-        onePlayer.onclick() = playerState.onePlayer(event) //this is skipping selecting 1 player or 2 players and getting into the next step
-    }
  },
 
- onePlayer: function(event) {
-    let clicked = event.target
-    console.log(clicked)
-    let onePlayer = document.getElementsByClassName('numOfPlayers')[0];
-            onePlayer.style.visibility = 'hidden'
-            twoPlayers.style.visibility = 'hidden'
-            document.getElementById('player1Name').style.visibility = 'visible'
-            // computerize = true;
-        },
+ onePlayer: function() {
+    onePlayer.style.visibility = 'hidden';
+    twoPlayers.style.visibility = 'hidden';
+    player2.style.visibility = 'hidden';
+    document.getElementById('player1Input').style.visibility = 'visible';
+    document.getElementById('enter').style.visibility = 'visible';
+    player2.innerText = 'Computer'
+    playerState.computerize = true;
+ },
+
+twoPlayers: function() {
+    onePlayer.style.visibility = 'hidden';
+    twoPlayers.style.visibility = 'hidden';
+    document.getElementById('player1Input').style.visibility = 'visible';
+    document.getElementById('enter').style.visibility = 'visible';
+},
+
+whoStarts: function() {
+   gameState.currentPlayer = Math.floor(Math.random() * 2 + 1);
+   console.log(gameState.currentPlayer);
+   document.getElementById('enter').style.visibility = 'hidden';
+   document.getElementById('player1Input').style.visibility = 'hidden';
+   player1.innerText = document.getElementById('player1Input').value;
+   updateBoard();
+},
+
 }
 
-document.getElementById('startingButtons').addEventListener('click',playerState.startGame);
+startButton.addEventListener('click', playerState.startGame);
 
-/////////
+onePlayer.addEventListener('click', playerState.onePlayer);
+
+document.getElementById('enter').addEventListener('click', playerState.whoStarts);
+
+/////////////
+
 const newBoard = [
     4, 4, 4, 4, 4, 4, 0, /* player 1 */ 4, 4, 4, 4, 4, 4, 0 /* player 2 */
 ];
 
 const gameState = {
     board: newBoard, // from above
-    currentPlayer: 1, // switch to 2 when the player swaps
+    currentPlayer: 0,
 
     //connect board to indexes
     playerOneIndexes: {
@@ -82,6 +100,7 @@ const gameState = {
             }       
             gameState.currentPlayer = 2;
         } else {
+           
             if (endIndex === 13){
                 return;
             }
@@ -233,7 +252,13 @@ const gameState = {
 //enter Computer under player 2
 //use math.random to make it choose a player2side index
 //call when player 1's turn is done 
-
+function calculateComputerTurn() {
+    // Determine if the player is a computer. If not, return
+    // If the current player is a computer, pick a random element between 7 and 12
+    // If that index is empty in the game state, pick another random element (while loop or recursion (calling calculateComputerTurn again))
+    // When there is a non-empty pit, play move. this method may need to be updated to take an index instead of an event
+    // There may need to be a moveFromClick and move(integer). moveFromClick would get the index from the dom as the current move does, then call move(integer) which would handle all the main logic the current move function does.
+}
 
 
 // function endGame
@@ -249,7 +274,7 @@ document.getElementById('playerPits').addEventListener('click', (event) => {
     //purposely named the HTML ids to be the same as the keys to pass them through to the indexed objects
     gameState.move(event.target.id);
     updateBoard();
-
+    calculateComputerTurn();
 })
 
 //render board values to HTML
@@ -270,6 +295,14 @@ function updateBoard() {
     document.getElementById('twelve').innerText = gameState.board[12];
     document.getElementById('thirteenEnd').innerText = gameState.board[13];
 
+
+    if (gameState.currentPlayer === 1){
+        player1.style.visibility = 'visible';
+        player2.style.visibility = 'hidden';
+    } else if (gameState.currentPlayer === 2) {
+        player1.style.visibility = 'hidden';
+        player2.style.visibility = 'visible';
+    }
 }
 
 updateBoard()
