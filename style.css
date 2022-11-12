@@ -1,16 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@500&family=Quicksand:wght@600&family=Righteous&family=Staatliches&display=swap');
 
+/* font-family: 'Noto Nastaliq Urdu', serif;
+font-family: 'Quicksand', sans-serif;
+font-family: 'Righteous', cursive;
+font-family: 'Staatliches', cursive; */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 body {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
-    background: url();
+    background: url('Images/greenLeaves.jpg');
+    /* background-repeat: no-repeat; */
+    background-size: 100%;
+    font-family: 'Quicksand', sans-serif;
 }
 
 h1 {
@@ -19,6 +28,8 @@ h1 {
     text-align: center;
     padding: 5px;
     margin: 15px auto;
+    color: tomato;
+    text-shadow: ;
 }
 
 #startingButtons {
@@ -59,8 +70,18 @@ h1 {
 #start {
     /* margin-top: 100px; */
     visibility: visible;
+    padding: 5px;
+    background-color: tomato;
+    box-shadow: -1px 1px 5px 3px rgb(48, 41, 39);
+    color: whitesmoke;
+    font-family: 'Righteous', cursive;
+    border: none;
+    border-radius: 10%;
 }
 
+#reset {
+    background-color: aqua;
+}
 .numOfPlayers { 
     /* visibility: hidden; */
 }
@@ -77,14 +98,10 @@ h1 {
     /* visibility: hidden; */
 }
 
-div {
-    height: 50px;
-    width: 50px;
-}
 
 #gameboard {
-    width: 600px;
-    height: 100px;
+    width: 950px;
+    height: 250px;
     margin: 25px auto auto auto;
     display: flex;
     flex-direction: row;
@@ -92,56 +109,72 @@ div {
     align-items: center;
     justify-content: center;
     font-family: 'Noto Nastaliq Urdu', serif;
+    background: url('Images/woodOne.jpg');
+    background-size: contain;
 }
 
 #playerPits {
-    height: 100px;
-    width: 300px;
+    height: 250px;
+    width: 650px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    border: 1px solid black;
+    justify-content: space-evenly;
 }
 
 #playerOne div,
 #playerTwo div {
-    border: 1px solid black;
+    border: 5px double rgb(89, 58, 17);
     text-align: center;
+    font-size: xx-large;
+    height: 100px;
+    width: 100px;
+    background-color: rgba(130, 101, 101, 0.466);
+    border-radius: 50%;
+    color: whitesmoke;
+    font-size: xx-large;
 }
 
 #playerOne {
     display: flex;
     flex-flow: row nowrap;
-    width: 300px;
-    height: 50px;
-    border: 1px solid blue;
+    width: 650px;
+    height: 110px;
+    justify-content: space-between;
 }
 
 
 #sixEnd {
-    height: 100px;
-    width: 50px;
-    border: 1px solid blue;
-    align-self: flex-start;
+    height: 200px;
+    width: 100px;
+    margin-left: 25px;
+    border: 5px double rgb(89, 58, 17);
     text-align: center;
-    padding-top: 40px;
+    padding-top: 50px;
+    border-radius: 50%;
+    font-size: xx-large;
+    color: whitesmoke;
+    font-size: xx-large;
 }
 
 
 #playerTwo {
     display: flex;
     flex-flow: row nowrap;
-    width: 300px;
-    height: 50px;
-    border: 1px solid orange;
+    width: 650px;
+    height: 110px;
+    justify-content: space-between;
 }
 
 #thirteenEnd {
-    height: 100px;
-    border: 1px solid orange;
-    align-self: flex-end;
+    height: 200px;
+    width: 100px;
+    margin-right: 25px;
+    border: 5px double rgb(89, 58, 17);
     text-align: center;
-    padding-top: 40px;
+    padding-top: 50px;
+    border-radius: 50%;
+    color: whitesmoke;
+    font-size: xx-large;
 }
