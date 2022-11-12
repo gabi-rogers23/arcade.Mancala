@@ -9,13 +9,13 @@ font-family: 'Staatliches', cursive; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
 
 body {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
+    align-items: center;
     background: url('Images/greenLeaves.jpg');
     /* background-repeat: no-repeat; */
     background-size: 100%;
@@ -28,74 +28,177 @@ h1 {
     text-align: center;
     padding: 5px;
     margin: 15px auto;
-    color: tomato;
-    text-shadow: ;
+    color: #683131;
+    font-size: 300%;
+    -webkit-text-stroke: #683131;
 }
 
 #startingButtons {
-    width: 500px;
-    height: 250px;
+    width: 200px;
+    height: 100px;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    justify-content: space-around;
-    margin: 25px auto;
-    border: 1px solid red;
+    justify-content: center;
+    margin-top: 25px;
+    /* border: 1px solid red; */
 }
+
+#playerButtons {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    /* border: 1px solid blue; */
+    height: 150px;
+}
+
 
 #player1 {
     visibility: hidden;
-    background: blue;
+    background: #683131;
     color: white;
     width: 200px;
     text-align: center;
+    margin-top: 25px;
+    align-self: center;
 }
 
 #player2 {
-    /* visibility: hidden; */
-    background: blue;
+    visibility: hidden;
+    background: #683131;
     color: white;
     width: 200px;
     text-align: center;
+    align-self: center;
+    margin-top: 25px;
 }
 
 #winner {
-    /* visibility: hidden; */
-    background: blue;
+    visibility: hidden;
+    background: #683131;
     color: white;
     width: 200px;
+    font-size: xx-large;
     text-align: center;
+    align-self: center;
+    margin-top: 25px;
+    /* border: 1px solid yellow; */
 }
 
 #start {
-    /* margin-top: 100px; */
-    visibility: visible;
-    padding: 5px;
-    background-color: tomato;
-    box-shadow: -1px 1px 5px 3px rgb(48, 41, 39);
-    color: whitesmoke;
-    font-family: 'Righteous', cursive;
-    border: none;
-    border-radius: 10%;
+ visibility: visible;
+ height: 35px;
+ width: 75px;
+ padding: 5px;
+ color: whitesmoke;
+ font-family: 'Righteous', cursive;
+ background-color: #683131;
+ border: 2px solid #683131;
+ border-radius: 15px;
+ outline: none;
+ text-align: center;
+ transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+ will-change: transform; 
+ position: absolute;
 }
+
+#start:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+#start:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
 
 #reset {
-    background-color: aqua;
-}
-.numOfPlayers { 
-    /* visibility: hidden; */
+    visibility: visible;
+    height: 35px;
+    width: 75px;
+    padding: 5px;
+    color: whitesmoke;
+    font-family: 'Righteous', cursive;
+    background-color: #683131;
+    border: 2px solid #683131;
+    border-radius: 15px;
+    outline: none;
+    text-align: center;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    will-change: transform;
+    position: absolute;
+    margin-top: 100px;
 }
 
+#reset:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+  
+#reset:active {
+    box-shadow: none;
+    transform: translateY(0);
+ }
+
+.numOfPlayers { 
+    visibility: hidden;
+    height: 25px;
+    width: 75px;
+    color: whitesmoke;
+    font-family: 'Righteous', cursive;
+    background-color: #683131;
+    border: 2px solid #683131;
+    border-radius: 15px;
+    outline: none;
+    text-align: center;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    will-change: transform;
+}
+
+.numOfPlayers:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+  
+.numOfPlayers:active {
+    box-shadow: none;
+    transform: translateY(0);
+ }
+
+
 #player1Input {
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 #enter {
-    /* visibility: hidden; */
+    visibility: hidden;
+    height: 35px;
+    width: 75px;
+    color: whitesmoke;
+    font-family: 'Righteous', cursive;
+    background-color: #683131;
+    /* border: 2px solid red; */
+    border-radius: 15px;
+    outline: none;
+    text-align: center;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    will-change: transform;
 }
 
+#enter:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+  
+#enter:active {
+    box-shadow: none;
+    transform: translateY(0);
+ }
+
 #player2Input {
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 

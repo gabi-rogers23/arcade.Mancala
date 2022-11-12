@@ -64,7 +64,7 @@ reset: function() {
     startButton.style.visibility = 'visible';
     onePlayer.style.visibility = 'hidden';
     twoPlayers.style.visibility = 'hidden';
-    computerize = false;
+    playerState.computerize = false;
     player2name = null;
     player1.innerText = "";
     player2.innerText = "";
@@ -363,6 +363,8 @@ document.getElementById('playerPits').addEventListener('click', (event) => {
 document.getElementById('reset').addEventListener('click', (event) => {
     playerState.reset();
     gameState.reset();
+    document.getElementById('winner').style.visibility = 'hidden';
+    document.getElementById('gameboard').style.visibility = 'visible';
     updateBoard();
 })
 
