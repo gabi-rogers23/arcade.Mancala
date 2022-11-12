@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@500&family=Quicksand:wght@600&family=Righteous&family=Staatliches&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +10,7 @@ body {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
+    background: url();
 }
 
 h1 {
@@ -19,13 +22,14 @@ h1 {
 }
 
 #startingButtons {
-    width: 50px;
-    height: 25px;
+    width: 500px;
+    height: 250px;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     margin: 25px auto;
+    border: 1px solid red;
 }
 
 #player1 {
@@ -37,7 +41,15 @@ h1 {
 }
 
 #player2 {
-    visibility: hidden;
+    /* visibility: hidden; */
+    background: blue;
+    color: white;
+    width: 200px;
+    text-align: center;
+}
+
+#winner {
+    /* visibility: hidden; */
     background: blue;
     color: white;
     width: 200px;
@@ -45,24 +57,24 @@ h1 {
 }
 
 #start {
-    margin-top: 100px;
+    /* margin-top: 100px; */
     visibility: visible;
 }
 
 .numOfPlayers { 
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 #player1Input {
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 #enter {
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 #player2Input {
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 div {
@@ -79,6 +91,7 @@ div {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    font-family: 'Noto Nastaliq Urdu', serif;
 }
 
 #playerPits {
@@ -96,7 +109,6 @@ div {
 #playerTwo div {
     border: 1px solid black;
     text-align: center;
-    padding-top: 15px;
 }
 
 #playerOne {

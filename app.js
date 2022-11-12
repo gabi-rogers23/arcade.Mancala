@@ -1,11 +1,5 @@
 
-//function howManyPlayers
-//have pop up ask for how many players (1 or 2)
-//Ask for player/players to input name/names
-//If one player, put 'computer' for player 2
-
 //Have the game choose player 1 or player 2 to start
-//display who's turn it is alternating according to the rules
 let startButton = document.getElementById('start');
 let onePlayer = document.getElementsByClassName('numOfPlayers')[0];
 let twoPlayers = document.getElementsByClassName('numOfPlayers')[1];
@@ -15,27 +9,33 @@ let player2 = document.getElementById('player2');
 const playerState = {
 
 computerize: false,
+player2name: null,
 
- startGame: function() {
-        startButton.style.visibility = 'hidden';
-        onePlayer.style.visibility = 'visible';
-        twoPlayers.style.visibility = 'visible';
+
+startGame: function() { // ask for how many players (1 or 2)
+    startButton.style.visibility = 'hidden';
+    onePlayer.style.visibility = 'visible';
+    twoPlayers.style.visibility = 'visible';
  },
 
- onePlayer: function() {
+//Ask for player/players to input name/names
+onePlayer: function() { //If one player, put 'computer' for player 2
     onePlayer.style.visibility = 'hidden';
     twoPlayers.style.visibility = 'hidden';
     player2.style.visibility = 'hidden';
     document.getElementById('player1Input').style.visibility = 'visible';
     document.getElementById('enter').style.visibility = 'visible';
-    player2.innerText = 'Computer'
+    playerState.player2name = 'Computer'
     playerState.computerize = true;
  },
 
 twoPlayers: function() {
     onePlayer.style.visibility = 'hidden';
     twoPlayers.style.visibility = 'hidden';
+    player1.style.visibility = 'hidden';
+    player2.style.visibility = 'hidden';
     document.getElementById('player1Input').style.visibility = 'visible';
+    document.getElementById('player2Input').style.visibility = 'visible';
     document.getElementById('enter').style.visibility = 'visible';
 },
 
@@ -44,8 +44,33 @@ whoStarts: function() {
    console.log(gameState.currentPlayer);
    document.getElementById('enter').style.visibility = 'hidden';
    document.getElementById('player1Input').style.visibility = 'hidden';
+
+   document.getElementById('player2Input').style.visibility = 'hidden';
    player1.innerText = document.getElementById('player1Input').value;
+   if (playerState.computerize === true) {
+    player2.innerText = "Computer";
+
+    if (gameState.currentPlayer === 2 && playerState.computerize === true) {
+        calculateComputerTurn();
+       } 
+} else {
+    playerState.player2name = document.getElementById('player2Input').value;
+    player2.innerText = playerState.player2name;
+}
    updateBoard();
+},
+
+reset: function() {
+    startButton.style.visibility = 'visible';
+    onePlayer.style.visibility = 'hidden';
+    twoPlayers.style.visibility = 'hidden';
+    computerize = false;
+    player2name = null;
+    player1.innerText = "";
+    player2.innerText = "";
+    document.getElementById('player1Input').value = "";
+    document.getElementById('player2Input').value = "";
+
 },
 
 }
@@ -54,16 +79,18 @@ startButton.addEventListener('click', playerState.startGame);
 
 onePlayer.addEventListener('click', playerState.onePlayer);
 
+twoPlayers.addEventListener('click', playerState.twoPlayers);
+
 document.getElementById('enter').addEventListener('click', playerState.whoStarts);
 
 /////////////
 
-const newBoard = [
-    4, 4, 4, 4, 4, 4, 0, /* player 1 */ 4, 4, 4, 4, 4, 4, 0 /* player 2 */
-];
 
 const gameState = {
-    board: newBoard, // from above
+    board: [
+        4, 4, 4, 4, 4, 4, 0, /* player 1 */ 4, 4, 4, 4, 4, 4, 0 /* player 2 */
+    ],
+
     currentPlayer: 0,
 
     //connect board to indexes
@@ -150,7 +177,7 @@ const gameState = {
 
         //Player 2//
         adjustedIndex = endIndex % 13;
-        console.log(adjustedIndex)
+        // console.log(adjustedIndex)
         if (gameState.currentPlayer === 2 && gameState.board[adjustedIndex] === 1) {
          addedPips = 0;
 
@@ -185,11 +212,8 @@ const gameState = {
         }
     },
    
-
-    //select the id to match the keys in the playerIndexes Objects
-    move: function (playerClickKey) {
+    clickMove: function (playerClickKey) {
         let pitIndex;
-        let copyBoard;
 
         //checking that a player can only access their side
         if (gameState.currentPlayer === 1) {
@@ -198,6 +222,12 @@ const gameState = {
             pitIndex = gameState.playerTwoIndexes[playerClickKey];
         }
 
+        gameState.move(pitIndex);
+    },
+
+    //select the id to match the keys in the playerIndexes Objects
+    move: function (pitIndex) {
+        
         if (pitIndex === null || pitIndex === undefined) {
             return; //the player selected an invalid index
         }
@@ -242,28 +272,71 @@ const gameState = {
         console.log(copyBoard);
         gameState.stealPips(endIndex);
         gameState.switchPlayer(endIndex);
+
+        console.log('Gameboard ' + gameState.board)
+
+        if (gameState.isGameOver()) {
+            return;
+        }
+
+        if (gameState.currentPlayer === 2 && playerState.computerize === true) {
+            calculateComputerTurn();
+            console.log('Gameboard after computer' + gameState.board)
+           } 
+           
+           
+    },
+
+    playerOneBoardEmpty: function () {
+        //checking Player 1 Indexes
+        for (let i = 0; i <= 5; i++ ) { 
+            let amount = gameState.board[i]
+            if (amount === 0) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    },
+
+    playerTwoBoardEmpty: function () {
+        //checking Player 2 indexes
+        for (let i = 7; i <= 12; i++ ) { 
+            let amount = gameState.board[i]
+            if (amount === 0) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    },
+
+    isGameOver: function () {
+        return gameState.playerOneBoardEmpty() || gameState.playerTwoBoardEmpty()  
+    },
+
+    reset: function() {
+        gameState.board = [ 4, 4, 4, 4, 4, 4, 0, /* player 1 */ 4, 4, 4, 4, 4, 4, 0 /* player 2 */];
+        gameState.currentPlayer = 0;
     }
-
 }
 
 
 
-// function computerPlayer
-//enter Computer under player 2
-//use math.random to make it choose a player2side index
-//call when player 1's turn is done 
 function calculateComputerTurn() {
-    // Determine if the player is a computer. If not, return
-    // If the current player is a computer, pick a random element between 7 and 12
-    // If that index is empty in the game state, pick another random element (while loop or recursion (calling calculateComputerTurn again))
-    // When there is a non-empty pit, play move. this method may need to be updated to take an index instead of an event
-    // There may need to be a moveFromClick and move(integer). moveFromClick would get the index from the dom as the current move does, then call move(integer) which would handle all the main logic the current move function does.
+       
+ let randomIndex = Math.floor(Math.random() * (13 - 7) + 7);
+
+    while (gameState.board[randomIndex] === 0) {
+        randomIndex =  Math.floor(Math.random() * (13 - 7) + 7);
+    } 
+    console.log("computer move index " + randomIndex)
+    gameState.move(randomIndex)
+    updateBoard();
 }
 
-
-// function endGame
-//  call if one side is empty of pips
-//  Display which player wins ~or~ if it was a draw
 
 // function gameReset 
 //html code reset button
@@ -272,36 +345,73 @@ function calculateComputerTurn() {
 
 document.getElementById('playerPits').addEventListener('click', (event) => {
     //purposely named the HTML ids to be the same as the keys to pass them through to the indexed objects
-    gameState.move(event.target.id);
+    
+    if (playerState.currentPlayer === 0){ 
+        return; //blocks clicks before the players are set
+    }
+
+    if (playerState.currentPlayer === 2 && playerState.computerize === true){
+        return; //blocks clicks when it's the computer's turn
+    }
+
+    gameState.clickMove(event.target.id);
+
     updateBoard();
-    calculateComputerTurn();
+    
 })
 
-//render board values to HTML
+document.getElementById('reset').addEventListener('click', (event) => {
+    playerState.reset();
+    gameState.reset();
+    updateBoard();
+})
+
+
+//render gameState.board values to HTML
 function updateBoard() {
-
-    document.getElementById('zero').innerText = gameState.board[0];
-    document.getElementById('one').innerText = gameState.board[1];
-    document.getElementById('two').innerText = gameState.board[2];
-    document.getElementById('three').innerText = gameState.board[3];
-    document.getElementById('four').innerText = gameState.board[4];
-    document.getElementById('five').innerText = gameState.board[5];
-    document.getElementById('sixEnd').innerText = gameState.board[6];
-    document.getElementById('seven').innerText = gameState.board[7];
-    document.getElementById('eight').innerText = gameState.board[8];
-    document.getElementById('nine').innerText = gameState.board[9];
-    document.getElementById('ten').innerText = gameState.board[10];
-    document.getElementById('eleven').innerText = gameState.board[11];
-    document.getElementById('twelve').innerText = gameState.board[12];
-    document.getElementById('thirteenEnd').innerText = gameState.board[13];
-
-
-    if (gameState.currentPlayer === 1){
+///if the game ends
+    if (gameState.isGameOver()){
+        document.getElementById('gameboard').style.visibility = 'hidden';
         player1.style.visibility = 'visible';
-        player2.style.visibility = 'hidden';
-    } else if (gameState.currentPlayer === 2) {
-        player1.style.visibility = 'hidden';
         player2.style.visibility = 'visible';
+        document.getElementById('winner').style.visibility = 'visible';
+
+        player1.innerText = `${document.getElementById('player1Input').value}'s Score is ${gameState.board[6]}`;
+
+        player2.innerText = `${playerState.player2name}'s Score is ${gameState.board[13]}`;
+//who wins
+        if (gameState.board[6] > gameState.board[13]) {
+            document.getElementById('winner').innerText = `${document.getElementById('player1Input').value} WINS!`
+        } else if (gameState.board[6] < gameState.board[13]) {
+            document.getElementById('winner').innerText = `${playerState.player2name} WINS!`
+        } else if (gameState.board[6] === gameState.board[13]) {
+            document.getElementById('winner').innerText = "It's a Draw! Play Again!"
+        }
+
+    } else {
+        document.getElementById('zero').innerText = gameState.board[0];
+        document.getElementById('one').innerText = gameState.board[1];
+        document.getElementById('two').innerText = gameState.board[2];
+        document.getElementById('three').innerText = gameState.board[3];
+        document.getElementById('four').innerText = gameState.board[4];
+        document.getElementById('five').innerText = gameState.board[5];
+        document.getElementById('sixEnd').innerText = gameState.board[6];
+        document.getElementById('seven').innerText = gameState.board[7];
+        document.getElementById('eight').innerText = gameState.board[8];
+        document.getElementById('nine').innerText = gameState.board[9];
+        document.getElementById('ten').innerText = gameState.board[10];
+        document.getElementById('eleven').innerText = gameState.board[11];
+        document.getElementById('twelve').innerText = gameState.board[12];
+        document.getElementById('thirteenEnd').innerText = gameState.board[13];
+        
+        //switching the name label of who is playing
+        if (gameState.currentPlayer === 1){
+            player1.style.visibility = 'visible';
+            player2.style.visibility = 'hidden';
+        } else if (gameState.currentPlayer === 2) {
+            player1.style.visibility = 'hidden';
+            player2.style.visibility = 'visible';
+        }
     }
 }
 
