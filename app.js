@@ -324,24 +324,19 @@ const gameState = {
 }
 
 
-
 function calculateComputerTurn() {
-       
- let randomIndex = Math.floor(Math.random() * (13 - 7) + 7);
+    setTimeout(() => {
+        let randomIndex = Math.floor(Math.random() * (13 - 7) + 7);
 
-    while (gameState.board[randomIndex] === 0) {
-        randomIndex =  Math.floor(Math.random() * (13 - 7) + 7);
-    } 
-    console.log("computer move index " + randomIndex)
-    gameState.move(randomIndex)
-    updateBoard();
+        while (gameState.board[randomIndex] === 0) {
+            randomIndex =  Math.floor(Math.random() * (13 - 7) + 7);
+        } 
+        console.log("computer move index " + randomIndex)
+        gameState.move(randomIndex)
+        updateBoard();
+      }, 1500);
 }
 
-
-// function gameReset 
-//html code reset button
-// reset's the board
-// reset's the players names?
 
 document.getElementById('playerPits').addEventListener('click', (event) => {
     //purposely named the HTML ids to be the same as the keys to pass them through to the indexed objects
