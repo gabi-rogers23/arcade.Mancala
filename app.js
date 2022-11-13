@@ -1,5 +1,4 @@
-
-//Have the game choose player 1 or player 2 to start
+//player DOM variables
 let startButton = document.getElementById('start');
 let onePlayer = document.getElementsByClassName('numOfPlayers')[0];
 let twoPlayers = document.getElementsByClassName('numOfPlayers')[1];
@@ -19,13 +18,14 @@ const playerState = {
     },
 
     //Ask for player/players to input name/names
-    onePlayer: function () { //If one player, put 'computer' for player 2
+    onePlayer: function () { 
         onePlayer.style.visibility = 'hidden';
         twoPlayers.style.visibility = 'hidden';
         player2.style.visibility = 'hidden';
         document.getElementById('player1Input').style.visibility = 'visible';
         document.getElementById('enter').style.visibility = 'visible';
-        playerState.player2name = 'Computer'
+        //If one player, put 'computer' for player 2
+        playerState.player2name = 'Computer';
         playerState.computerize = true;
     },
 
@@ -39,7 +39,8 @@ const playerState = {
         document.getElementById('enter').style.visibility = 'visible';
     },
 
-    whoStarts: function () {
+    //Have the game choose player 1 or player 2 to start
+    whoStarts: function () { 
         gameState.currentPlayer = Math.floor(Math.random() * 2 + 1);
         console.log(gameState.currentPlayer);
         document.getElementById('enter').style.visibility = 'hidden';
