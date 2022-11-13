@@ -222,8 +222,10 @@ const gameState = {
         //checking that a player can only access their side
         if (gameState.currentPlayer === 1) {
             pitIndex = gameState.playerOneIndexes[playerClickKey];
-        } else {
+        } else if (gameState.currentPlayer === 2) {
             pitIndex = gameState.playerTwoIndexes[playerClickKey];
+        } else {
+            return;
         }
 
         gameState.move(pitIndex);
