@@ -44,6 +44,7 @@ whoStarts: function() {
    console.log(gameState.currentPlayer);
    document.getElementById('enter').style.visibility = 'hidden';
    document.getElementById('player1Input').style.visibility = 'hidden';
+   document.getElementById('reset').style.visibility = 'visible'
 
    document.getElementById('player2Input').style.visibility = 'hidden';
    player1.innerText = document.getElementById('player1Input').value;
@@ -67,10 +68,12 @@ reset: function() {
     playerState.computerize = false;
     player2name = null;
     player1.innerText = "";
+    player1.style.visibility = 'hidden';
     player2.innerText = "";
+    player2.style.visibility = 'hidden';
     document.getElementById('player1Input').value = "";
     document.getElementById('player2Input').value = "";
-
+    document.getElementById('reset').style.visibility = 'hidden';
 },
 
 }
@@ -261,7 +264,7 @@ const gameState = {
             copyBoard[loop] += 1;
         }
 
-          // If a player goes around the board, they cannot put any pips in the opposite players bucket/scoreKeeper
+        // If a player goes around the board, they cannot put any pips in the opposite players bucket/scoreKeeper
 
         if (gameState.currentPlayer === 1) {
             copyBoard.push(gameState.board[13]);
@@ -328,7 +331,7 @@ function calculateComputerTurn() {
     setTimeout(() => {
         let randomIndex = Math.floor(Math.random() * (13 - 7) + 7);
 
-        while (gameState.board[randomIndex] === 0) {
+        while (gameState.board[randomIndex] === 0) { //while 0 keep looking for a random index
             randomIndex =  Math.floor(Math.random() * (13 - 7) + 7);
         } 
         console.log("computer move index " + randomIndex)
